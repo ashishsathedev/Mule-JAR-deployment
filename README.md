@@ -3,13 +3,13 @@ This is the example for mule 4 project JAR deployment using maven plugin.
 
 Configuration required :
 
-anypoint cloudhub uri
-mule version
-user credentials
-environment
-application name
-worker type
-workers
+1) anypoint cloudhub uri
+2) mule version
+3) user credentials
+4) environment
+5) application name
+6) worker type
+7) workers
 properties config like private key (encryption key for secured property encryption)
 after adding required maven plugin and cloudhub configuration execute following mvn command to deploy jar on cloudhub
 
