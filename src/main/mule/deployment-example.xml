@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1ba4c61d-6018-4f4f-a93c-5e5f1f302a62" >
+		<http:listener-connection host="localhost" port="8081"/>
+	</http:listener-config>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="9f15c2f2-802d-4947-b198-05428691bfb9" key="${mule.encrypt.key}" file="config.properties"/>
+	<flow name="deployment-exampleFlow" doc:id="e8eee3fb-c4b8-4bf1-af1d-68bde3e3a38d" >
+		<http:listener doc:name="Listener" doc:id="37910668-55b4-4aef-abf9-e16b590b759f" config-ref="HTTP_Listener_config" path="/dp/test"/>
+		<logger level="INFO" doc:name="Logger" doc:id="92b71df3-4357-458c-a053-dad6f8944c39" message="${secure::test.key}"/>
+		<ee:transform doc:name="Transform Message" doc:id="29120053-691d-4d80-a7fc-bcae1d169738" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	sp:Mule::p('secure::test.key')
+	
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
