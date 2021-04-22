@@ -10,7 +10,7 @@ Configuration required :
 5) application name
 6) worker type
 7) workers
-8)properties config like private key (encryption key for secured property encryption)
+8) properties config like private key (encryption key for secured property encryption)
 
 after adding required maven plugin and cloudhub configuration execute following mvn command to deploy jar on cloudhub
 
