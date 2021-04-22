@@ -1,2 +1,18 @@
-# Mule-zip-deployment
-This is the example for mule 4 project zip deployment using maven plugin.
+# Mule-JAR-deployment
+This is the example for mule 4 project JAR Cloudhub deployment using maven plugin.
+
+Configuration required :
+1) anypoint cloudhub uri
+2) mule version
+3) user credentials
+4) environment
+5) application name
+6) worker type
+7) workers
+8) properties config like private key (encryption key for secured property encryption)
+
+after adding required maven plugin and cloudhub configuration execute following mvn command to deploy jar on cloudhub
+
+mvn clean deploy -DmuleDeploy -DskipTests -Dmule.version=4.3.0 -Dusername=<anypoint username> -Dpassword=<password> -Denv=Sandbox -DencryptKey=<encryption key> -DworkerType=Micro -Dworkers=1
+
+for e.g : mvn clean deploy -DmuleDeploy -DskipTests -Dmule.version=4.3.0 -Dusername=user1 -Dpassword=****** -Denv=Sandbox -DencryptKey=abcxvyrte12893 -DworkerType=Micro -Dworkers=1
